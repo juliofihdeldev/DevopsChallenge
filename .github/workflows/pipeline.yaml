@@ -16,16 +16,13 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '24'
-
-      - name: Install pnpm
-        run: pnpm install --no-frozen-lockfile
+          node-version: '22'
 
       - name: Install dependencies
-        run: pnpm install
+        run: npm install
 
       - name: Run tests
-        run: pnpm test
+        run: npm test
 
       - name: Run linter
-        run: pnpm lint
+        run: npm lint
