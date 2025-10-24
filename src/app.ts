@@ -7,6 +7,7 @@ import logger from './config/logger';
 import morgan from 'morgan';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
+import { securityMiddleware } from './middlewares/security';
 
 const app = express();
 app.use(express.json());
@@ -21,6 +22,7 @@ app.use(
     },
   }),
 );
+app.use(securityMiddleware);
 
 // Routes
 app.use('/api/items', itemRoutes);
