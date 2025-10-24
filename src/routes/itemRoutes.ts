@@ -6,6 +6,7 @@ import {
   updateItem,
   deleteItem,
 } from '../controllers/itemController';
+import logger from '../config/logger';
 
 const router = Router();
 
@@ -25,10 +26,12 @@ router.get('/live', (req, res) => {
 });
 
 router.get('/readyz', (req, res) => {
+  logger.info('Readiness probe accessed');
   res.status(200).send('ready');
 });
 
 router.get('/healthz', (req, res) => {
+  logger.info('Health check accessed');
   res.status(200).send('OK');
 });
 
