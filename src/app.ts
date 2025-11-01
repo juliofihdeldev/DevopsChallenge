@@ -24,6 +24,15 @@ app.use(
 );
 app.use(securityMiddleware);
 
+// Health check endpoints (must be before other routes)
+app.get('/healthz', (req, res) => {
+  res.status(200).json({ status: 'OK', service: 'backend-challenge' });
+});
+
+app.get('/readyz', (req, res) => {
+  res.status(200).json({ status: 'ready', service: 'backend-challenge' });
+});
+
 // Routes
 app.use('/api/items', itemRoutes);
 

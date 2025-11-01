@@ -1,12 +1,12 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: backend_challenge-app-service
+  name: backend-challenge-app-service
   labels:
-    app: backend_challenge-app
+    app: backend-challenge-app
 spec:
   selector:
-    app: backend_challenge-app
+    app: backend-challenge-app
   ports:
     - protocol: TCP
       port: 80

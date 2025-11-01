@@ -13,7 +13,7 @@
     "lint": "eslint 'src/**/*.ts'",
     "test": "jest",
     "test:watch": "jest --watch",
-    "deploy": "sh deploy.sh"
+    "deploy": "sh ./deploy.sh"
   },
   "devDependencies": {
     "@types/cookie-parser": "^1.4.10",

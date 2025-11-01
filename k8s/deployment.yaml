@@ -6,15 +6,15 @@ spec:
   replicas: 2
   selector:
     matchLabels:
-      app: backend_challenge-app
+      app: backend-challenge-app
   template:
     metadata:
       labels:
-        app: backend_challenge-app
+        app: backend-challenge-app
     spec:
       containers:
-        - name: backend_challenge-app
-          image: juliofihdeldev/backend_challenge-app:latest
+        - name: backend-challenge-app
+          image: juliofihdeldev/backend-challenge-app:latest
           ports:
             - containerPort: 3001
           env:
@@ -31,13 +31,15 @@ spec:
             limits:
               memory: '512Mi'
               cpu: '500m'
-            redinessProbe:
-              httpGet: item/readzy
+          readinessProbe:
+            httpGet:
+              path: /readyz
               port: 3001
-              initialDelaySeconds: 10
-              periodSeconds: 5
-            livenessProbe:
-              httpGet: item/healthz
+            initialDelaySeconds: 10
+            periodSeconds: 5
+          livenessProbe:
+            httpGet:
+              path: /healthz
               port: 3001
-              initialDelaySeconds: 15
-              periodSeconds: 20
+            initialDelaySeconds: 15
+            periodSeconds: 20
