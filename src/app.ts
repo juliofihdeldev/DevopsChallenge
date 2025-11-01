@@ -22,9 +22,7 @@ app.use(
     },
   }),
 );
-app.use(securityMiddleware);
-
-// Health check endpoints (must be before other routes)
+// Health check endpoints (must be before security middleware to avoid rate limiting)
 app.get('/healthz', (req, res) => {
   res.status(200).json({ status: 'OK', service: 'backend-challenge' });
 });
@@ -32,6 +30,8 @@ app.get('/healthz', (req, res) => {
 app.get('/readyz', (req, res) => {
   res.status(200).json({ status: 'ready', service: 'backend-challenge' });
 });
+
+app.use(securityMiddleware);
 
 // Routes
 app.use('/api/items', itemRoutes);

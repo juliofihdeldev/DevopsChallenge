@@ -4,6 +4,7 @@ metadata:
   name: api-deployment
 spec:
   replicas: 2
+  progressDeadlineSeconds: 600
   selector:
     matchLabels:
       app: backend-challenge-app
@@ -20,6 +21,8 @@ spec:
           env:
             - name: NODE_ENV
               value: 'production'
+            - name: PORT
+              value: '3001'
             - name: POD_NAME
               valueFrom:
                 fieldRef:
@@ -35,11 +38,17 @@ spec:
             httpGet:
               path: /readyz
               port: 3001
-            initialDelaySeconds: 10
+            initialDelaySeconds: 5
             periodSeconds: 5
+            timeoutSeconds: 3
+            failureThreshold: 3
+            successThreshold: 1
           livenessProbe:
             httpGet:
               path: /healthz
               port: 3001
-            initialDelaySeconds: 15
-            periodSeconds: 20
+            initialDelaySeconds: 10
+            periodSeconds: 10
+            timeoutSeconds: 3
+            failureThreshold: 3
+            successThreshold: 1
